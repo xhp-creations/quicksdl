@@ -57,11 +57,11 @@ https://github.com/yawut/ProgrammingOnTheU
 The Wii U version uses CMake to ensure you have your environment setup to
 compile the project.
 
-To compile:
-mkdir build
-cd build
-ckame ..
-make
+To compile:<br/>
+mkdir build<br/>
+cd build<br/>
+ckame .. <br/>
+make<br/>
 
 FEATURES
 ========
@@ -85,6 +85,6 @@ Quick SDL features:
 LINKS
 =====
 
-https://gitlab.com/xhp-creations/quicksdl	: source repository for Quick SDL
-https://gitlab.com/xhp-creations			: XHP Creations homepage
-https://gitlab.com/4TU                      : 4TU (For The Users)
+https://gitlab.com/xhp-creations/quicksdl : source repository for Quick SDL<br/>
+https://gitlab.com/xhp-creations          : XHP Creations homepage<br/>
+https://gitlab.com/4TU                    : 4TU (For The Users)
