@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Wii U Development",
+            "includePath": [
+                "/opt/devkitpro/portlibs/ppc/include/**",
+                "/opt/devkitpro/portlibs/wiiu/include/**",
+                "/opt/devkitpro/wut/include/**",
+                "/opt/devkitpro/devkitPPC/powerpc-eabi/include/**",
+                "QuickSDL",
+                "ExampleGame"
+            ],
+            "defines": [
+                "__WIIU__",
+                "__WUT__"
+            ],
+            "compilerPath": "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-g++",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64",
+            "compileCommands": "",
+            "compilerArgs": []
+        }
+    ],
+    "version": 4
+}
