@@ -7,7 +7,7 @@ LEGAL
 
 Quick SDL is 
 (C) 2019 XHP Creations (xhpcreations(at)att.net)
-https://gitlab.com/xhp-creations
+https://github.com/xhp-creations
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
@@ -25,8 +25,8 @@ along with this program; if not see <http://www.gnu.org/licenses/>.
 COMPILE
 =======
 
-The source code is hosted on GitLab.
-https://gitlab.com/xhp-creations/quicksdl
+The source code is hosted on GitHub.
+https://github.com/xhp-creations/quicksdl
 
 The project compiles and creates an example game, to add more screens,
 or change the starting screen, modify the ScreenManager Class, or employ
@@ -85,6 +85,6 @@ Quick SDL features:
 LINKS
 =====
 
-https://gitlab.com/xhp-creations/quicksdl : source repository for Quick SDL<br/>
-https://gitlab.com/xhp-creations          : XHP Creations homepage<br/>
-https://gitlab.com/4TU                    : 4TU (For The Users)
+https://github.com/xhp-creations/quicksdl : source repository for Quick SDL<br/>
+https://github.com/xhp-creations          : XHP Creations homepage<br/>
+https://github.com/fortheusers            : 4TU (For The Users)
