@@ -7,7 +7,7 @@
 #ifndef _INPUTMANAGER_H
 #define _INPUTMANAGER_H
 //---------------------------------------------------------------------
-#include <SDL2/SDL.h>
+#include <SDL.h>
 //---------------------------------------------------------------------
 #include "MathHelper.h"
 

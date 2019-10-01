@@ -7,7 +7,7 @@
 #include "GameManager.h"
 #include <time.h>
 
-#ifndef _WIN32
+#ifdef __WIIU__
 #include <whb/proc.h>
 #endif
 
@@ -116,10 +116,10 @@ namespace QuickSDL {
 
 	void GameManager::Run() {
 
-#ifdef _WIN32
-		while (!mQuit) {
-#else
+#ifdef __WIIU__
 		while (!mQuit && WHBProcIsRunning()) {
+#else
+		while (!mQuit) {
 #endif
 
 			mTimer->Update();
