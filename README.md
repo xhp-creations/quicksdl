@@ -40,8 +40,12 @@ compile the project.
 To compile:<br/>
 mkdir build<br/>
 cd build<br/>
-ckame .. <br/>
+cmake -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/wut/share/wut.toolchain.cmake .. <br/>
 make<br/>
+
+The command -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/wut/share/wut.toolchain.cmake is commented in the CMakeLists.txt file
+to easily copy and paste, or you may uncomment the 3rd line in the CMakeLists.txt file that reads as follows:
+#set(CMAKE_TOOLCHAIN_FILE $ENV{DEVKITPRO}/wut/share/wut.toolchain.cmake)
 
 FEATURES
 ========
