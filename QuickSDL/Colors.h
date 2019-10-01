@@ -1,6 +1,6 @@
 #ifndef _COLORS_H
 #define _COLORS_H
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 /* W3C colors */
 #define RGB_aliceblue SDL_Color { 0xf0, 0xf8, 0xff, 0xff }
