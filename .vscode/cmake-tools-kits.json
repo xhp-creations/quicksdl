@@ -1,0 +1,35 @@
+[
+  {
+    "name": "GCC 8.3.0",
+    "compilers": {
+      "C": "/usr/bin/gcc-8",
+      "CXX": "/usr/bin/g++-8"
+    }
+  },
+  {
+    "name": "GCC for c89 8.3.0",
+    "compilers": {
+      "C": "/usr/bin/c89-gcc"
+    }
+  },
+  {
+    "name": "GCC for c99 8.3.0",
+    "compilers": {
+      "C": "/usr/bin/c99-gcc"
+    }
+  },
+  {
+    "name": "GCC for powerpc-eabi 8.3.0",
+    "compilers": {
+      "C": "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-gcc-8.3.0"
+    },
+    "toolchainFile": "/opt/devkitpro/wut/share/wut.toolchain.cmake"
+  },
+  {
+    "name": "GCC for x86_64-linux-gnu 8.3.0",
+    "compilers": {
+      "C": "/usr/bin/x86_64-linux-gnu-gcc-8",
+      "CXX": "/usr/bin/x86_64-linux-gnu-g++-8"
+    }
+  }
+]
