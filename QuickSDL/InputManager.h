@@ -71,7 +71,8 @@ namespace QuickSDL {
 		//------------------------------------------------------------------------------------
 		enum MOUSE_BUTTON { left = 0, right, middle, back, forward };
 		enum HAT_DIR { hat_up = SDL_HAT_UP, hat_right = SDL_HAT_RIGHT, hat_down = SDL_HAT_DOWN, hat_left = SDL_HAT_LEFT };
-		enum AXIS_NUM { left_joy_x = 0, left_joy_y = 1, left_trigger = 2, right_joy_x = 3, right_joy_y = 4, right_trigger = 5 };
+		enum AXIS_NUM { left_joy_x = 0, left_joy_y = 1, left_trigger = 2, right_joy_x = 3, right_joy_y = 4, right_trigger = 5,
+						left_wiiu_joy_x = 0, left_wiiu_joy_y = 1, right_wiiu_joy_x = 2, right_wiiu_joy_y = 3 };
 		enum AXIS_DIR { axis_up = -16000, axis_down = 16000, axis_left = -16000, axis_right = 16000, trigger_down = 0 };
 
 	private:
