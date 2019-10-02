@@ -12,16 +12,6 @@ The project compiles and creates an example game, to add more screens,
 or change the starting screen, modify the ScreenManager Class, or employ
 your own classes to manage them.
 
-Windows
--------
-
-Make sure you install either the Visual Studio or the Mingw version
-of the SDL development library. You can use either compiler
-targeting 32 as well as 64-bit binary builds.
-
-Setup instructions are not covered here, just make sure to include the
-SDL include directories and link to the SDL library as needed.
-
 Wii U
 -----
 
@@ -46,6 +36,16 @@ make<br/>
 The command -DCMAKE_TOOLCHAIN_FILE=$DEVKITPRO/wut/share/wut.toolchain.cmake is commented in the CMakeLists.txt file
 to easily copy and paste, or you may uncomment the 3rd line in the CMakeLists.txt file that reads as follows:
 #set(CMAKE_TOOLCHAIN_FILE $ENV{DEVKITPRO}/wut/share/wut.toolchain.cmake)
+
+Windows
+-------
+
+Make sure you install either the Visual Studio or the Mingw version
+of the SDL development library. You can use either compiler
+targeting 32 as well as 64-bit binary builds.
+
+Setup instructions are not covered here, just make sure to include the
+SDL include directories and link to the SDL library as needed.
 
 FEATURES
 ========
