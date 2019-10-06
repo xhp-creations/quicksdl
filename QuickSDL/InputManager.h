@@ -95,6 +95,9 @@ namespace QuickSDL {
 		int mMouseXPos;
 		int mMouseYPos;
 
+    int mTouchXPos;
+    int mTouchYPos;
+
 		SDL_Joystick* joy;
 
 		Uint8* mPrevJoyButtonState;
@@ -148,6 +151,7 @@ namespace QuickSDL {
 		//Returns a Vector2 containing the current mouse position on screen 
 		//------------------------------------------------------------------
 		Vector2 MousePos();
+    Vector2 TouchPos();
 
 		bool JoyButtonDown(int button);
 		bool JoyButtonPressed(int button);
