@@ -230,9 +230,9 @@ namespace QuickSDL {
 		return Vector2((float)mMouseXPos, (float)mMouseYPos);
 	}
 
-  Vector2 InputManager::TouchPos() {
-    return Vector2((float)mTouchXPos, (float)mTouchYPos);
-  }
+	Vector2 InputManager::TouchPos() {
+		return Vector2((float)mTouchXPos, (float)mTouchYPos);
+	}
 
 	bool InputManager::MouseButtonDown(MOUSE_BUTTON button) {
 
@@ -349,11 +349,11 @@ namespace QuickSDL {
 		//Updating the mouse state to get the key states of the current frame
 		mMouseState = SDL_GetMouseState(&mMouseXPos, &mMouseYPos);
 
-    SDL_Finger* touchState = SDL_GetTouchFinger(0, 0);
-    if (touchState != NULL) {
-      mTouchXPos = touchState->x;
-      mTouchYPos = touchState->y;
-    }
+		SDL_Finger* touchState = SDL_GetTouchFinger(0, 0);
+		if (touchState != NULL) {
+			mTouchXPos = touchState->x;
+			mTouchYPos = touchState->y;
+		}
 
 		if (joy != NULL) {
 
