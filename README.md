@@ -69,6 +69,7 @@ Quick SDL features:
 CREDITS
 =======
 
+- Original Quick SDL concept created by Ather Omar
 - Initial Wii U Touchscreen support added by vgmoose
 - Cmake scripts fixed by QuarkTheAwesome
 - Wii U system font support added by NexoDevelopment
