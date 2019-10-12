@@ -68,6 +68,7 @@ namespace QuickSDL {
 		mRenderRect.h = mHeight;
 	}
 
+#ifdef __WIIU__
 	Texture::Texture(std::string text, int size, SDL_Color color) {
 
 		mGraphics = Graphics::Instance();
@@ -84,6 +85,7 @@ namespace QuickSDL {
 		mRenderRect.w = mWidth;
 		mRenderRect.h = mHeight;
 	}
+#endif
 
 	Texture::~Texture() {
 

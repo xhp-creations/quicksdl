@@ -161,6 +161,7 @@ namespace QuickSDL {
 		return mText[key];
 	}
 
+#ifdef __WIIU__
 	SDL_Texture* AssetManager::GetWiiUText(std::string text, int size, SDL_Color color) {
 
 		/* Get the address to the shared font */
@@ -184,6 +185,7 @@ namespace QuickSDL {
 		//returning the cached texture containing the text
 		return mText[key];
 	}
+#endif
 
 	Mix_Music* AssetManager::GetMusic(std::string filename) {
 
