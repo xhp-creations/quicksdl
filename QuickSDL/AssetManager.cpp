@@ -8,6 +8,18 @@
 //-----------------------------------------------------------------
 // QuickSDL
 //-----------------------------------------------------------------
+
+#ifdef __WIIU__
+#include <coreinit/memdefaultheap.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+int OSGetSharedData(int what, int flags, uint32_t **addr, uint32_t *size);
+#ifdef __cplusplus
+}
+#endif
+#endif
+
 namespace QuickSDL {
 
 	//Initializing to NULL
@@ -140,6 +152,30 @@ namespace QuickSDL {
 
 		//The key takes into account the font, text, size, and color to differentiate text textures
 		std::string key = text + filename + (char)size + (char)color.r + (char)color.b + (char)color.g;
+
+		//If the same text has not been rendered before, render it and add it to the mText map
+		if (mText[key] == nullptr)
+			mText[key] = Graphics::Instance()->CreateTextTexture(font, text, color);
+
+		//returning the cached texture containing the text
+		return mText[key];
+	}
+
+	SDL_Texture* AssetManager::GetWiiUText(std::string text, int size, SDL_Color color) {
+
+		/* Get the address to the shared font */
+		uint32_t *font_addr;
+		uint32_t  font_size;
+		OSGetSharedData(2, 0, &font_addr, &font_size);
+		
+		/* Copy the font to RW memory (because shared data is RO) */
+		void *font_rw = MEMAllocFromDefaultHeap(font_size);
+		memcpy(font_rw, font_addr, font_size);
+
+		TTF_Font* font = TTF_OpenFontRW(SDL_RWFromMem(font_rw, font_size), 1, size);
+
+		//The key takes into account the font, text, size, and color to differentiate text textures
+		std::string key = text + "wiiu_system" + (char)size + (char)color.r + (char)color.b + (char)color.g;
 
 		//If the same text has not been rendered before, render it and add it to the mText map
 		if (mText[key] == nullptr)

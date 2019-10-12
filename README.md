@@ -1,6 +1,6 @@
 This is the README for Quick SDL
 
-Current version is 0.9.1
+Current version is 0.9.2
 
 COMPILE
 =======
@@ -65,6 +65,13 @@ Quick SDL features:
 - Wii U Gamepad and XINPUT button, axis, and hat defines.
 - Uses SDL built-in Keyboard states for use on PC, Wii U support may be added later
 - A useful and powerful Math Helper
+
+CREDITS
+=======
+
+- Initial Wii U Touchscreen support added by vgmoose
+- Cmake scripts fixed by QuarkTheAwesome
+- Wii U system font support added by NexoDevelopment
 
 LINKS
 =====

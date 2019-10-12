@@ -68,6 +68,9 @@ namespace QuickSDL {
 		//If it has not been rendered before, the text is rendered and cached, then returned to be reused again later
 		//-------------------------------------------------------------------------------------------------------------------
 		SDL_Texture* GetText(std::string text, std::string filename, int size, SDL_Color color);
+#ifdef __WIIU__
+		SDL_Texture* GetWiiUText(std::string text, int size, SDL_Color color);
+#endif
 
 		//------------------------------------------------------------------------------------------
 		//If the music file was opened before, the cached Mix_Music* is returned

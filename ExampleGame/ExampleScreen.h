@@ -17,6 +17,9 @@ private:
 
 	Texture* mLogo;
 	Texture* mInstructions;
+#ifdef __WIIU__
+	Texture* mWiiUFontTest;
+#endif
 
 	float mSpinAmount;
 

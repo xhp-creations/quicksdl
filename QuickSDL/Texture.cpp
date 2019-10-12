@@ -68,6 +68,23 @@ namespace QuickSDL {
 		mRenderRect.h = mHeight;
 	}
 
+	Texture::Texture(std::string text, int size, SDL_Color color) {
+
+		mGraphics = Graphics::Instance();
+
+		//Loads the texture from the AssetManager to avoid loading textures more than once
+		mTex = AssetManager::Instance()->GetWiiUText(text, size, color);
+
+		//Clipped is false since the image is not loaded from a spritesheet
+		mClipped = false;
+
+		//Gets the Width and Height of the texture
+		SDL_QueryTexture(mTex, NULL, NULL, &mWidth, &mHeight);
+
+		mRenderRect.w = mWidth;
+		mRenderRect.h = mHeight;
+	}
+
 	Texture::~Texture() {
 
 		mTex = NULL;

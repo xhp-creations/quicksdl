@@ -15,9 +15,15 @@ ExampleScreen::ExampleScreen() {
 	mInstructions->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.95f));
 	mInstructions->Parent(this);
 
-	float mSpinAmount = 0.0f;
+#ifdef __WIIU__
+	mWiiUFontTest = new Texture("Wii U System Font Test", 24, RGB_white_dull);
+	mWiiUFontTest->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.88f));
+	mWiiUFontTest->Parent(this);
+#endif
 
-	bool mSpin = false;
+	mSpinAmount = 0.0f;
+
+	mSpin = false;
 }
 
 ExampleScreen::~ExampleScreen() {
@@ -27,6 +33,11 @@ ExampleScreen::~ExampleScreen() {
 
 	delete mInstructions;
 	mInstructions = NULL;
+
+#ifdef __WIIU__
+	delete mWiiUFontTest;
+	mWiiUFontTest = NULL;
+#endif
 }
 
 void ExampleScreen::SpinLogo(bool spin) {
@@ -78,4 +89,8 @@ void ExampleScreen::Render() {
 	mLogo->Render();
 
 	mInstructions->Render();
+
+#ifdef __WIIU__
+	mWiiUFontTest->Render();
+#endif
 }
