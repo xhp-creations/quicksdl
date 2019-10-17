@@ -174,7 +174,7 @@ void ExampleScreen::UpdateJoysticks(int joynum) {
 	}
 	else {
 
-		mJoystickNum = new Texture("Press BACK and R (2) for Previous Screen", "IBMPlexSans-SemiBold.ttf", 32, RGB_white_dull);
+		mJoystickNum = new Texture("Press SELECT and R (2) for Previous Screen", "IBMPlexSans-SemiBold.ttf", 32, RGB_white_dull);
 		mJoystickNum->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.04f));
 		mJoystickNum->Parent(this);
 

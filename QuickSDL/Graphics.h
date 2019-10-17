@@ -15,16 +15,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Colors.h"
+#include "UserDefines.h"
 
-//-------------------------------------------------------------------
-// Define for projects larger than 1280 x 720 on the Wii U
-//-------------------------------------------------------------------
-#ifdef USE_SCALING
-//-------------------------------------------------------------------
-// Set value to make screen size below or at 1280 x 720
-//-------------------------------------------------------------------
-#define SCALE_RATIO 0.85f
-#endif
 //-------------------------------------------------------------------
 // QuickSDL
 //-------------------------------------------------------------------
@@ -37,11 +29,11 @@ namespace QuickSDL {
 	public:
 
 		//The Width of the game's window
-		const int SCREEN_WIDTH = 1280;
+		const int SCREEN_WIDTH = PROJECT_WIDTH;
 		//The Height of the game's window
-		const int SCREEN_HEIGHT = 720;
+		const int SCREEN_HEIGHT = PROJECT_HEIGHT;
 		//The title of the game's window
-		const char* WINDOW_TITLE = "Quick SDL";
+		const char* WINDOW_TITLE = PROJECT_TITLE;
 
 	private:
 		//Needed to make GameManager a singleton class
