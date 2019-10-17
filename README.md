@@ -62,7 +62,7 @@ Quick SDL features:
 - W3C Color definitions included
 - Multi joystick support
 - Keeps the state of the joystick, including buttons, axises, and hat.
-- Wii U Gamepad and XINPUT button, axis, and hat defines.
+- Wii U Gamepad / Wii U ProController, Wii Mote, and XINPUT button, axis, and hat defines.
 - Uses SDL built-in Keyboard states for use on PC, Wii U support may be added later
 - A useful and powerful Math Helper
 
