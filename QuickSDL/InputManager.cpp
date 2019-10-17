@@ -47,15 +47,15 @@ namespace QuickSDL {
 		delete[] mPrevKeyboardState;
 		mPrevKeyboardState = NULL;
 
-		delete[] mPrevJoyButtonState;
-		mPrevJoyButtonState = NULL;
+		//delete[] mPrevJoyButtonState;
+		//mPrevJoyButtonState = NULL;
 
-		mJoyButtonState = NULL;
+		//mJoyButtonState = NULL;
 
-		delete[] mPrevJoyAxisState;
-		mPrevJoyAxisState = NULL;
+		//delete[] mPrevJoyAxisState;
+		//mPrevJoyAxisState = NULL;
 
-		mJoyAxisState = NULL;
+		//mJoyAxisState = NULL;
 	}
 
 	bool InputManager::KeyDown(SDL_Scancode scanCode) {
@@ -75,153 +75,173 @@ namespace QuickSDL {
 		return (mPrevKeyboardState[scanCode] != 0) && (mKeyboardState[scanCode] == 0);
 	}
 
-	bool InputManager::JoyButtonDown(int button) {
+	bool InputManager::JoyButtonDown(int button, int joynum) {
 
-		if (joy != NULL)
-			return (mJoyButtonState[button] != 0);
+		if (joy[joynum] != NULL)
+			return (mJoyButtonState[joynum][button] != 0);
 		else
 			return false;
 	}
 
-	bool InputManager::JoyButtonPressed(int button) {
+	bool InputManager::JoyButtonPressed(int button, int joynum) {
 
-		if (joy != NULL)
-			return (mPrevJoyButtonState[button]) == 0 && (mJoyButtonState[button] != 0);
+		if (joy[joynum] != NULL)
+			return (mPrevJoyButtonState[joynum][button]) == 0 && (mJoyButtonState[joynum][button] != 0);
 		else
 			return false;
 	}
 
-	bool InputManager::JoyButtonReleased(int button) {
+	bool InputManager::JoyButtonReleased(int button, int joynum) {
 
-		if (joy != NULL)
-			return (mPrevJoyButtonState[button] != 0) && (mJoyButtonState[button] == 0);
+		if (joy[joynum] != NULL)
+			return (mPrevJoyButtonState[joynum][button] != 0) && (mJoyButtonState[joynum][button] == 0);
 		else
 			return false;
 	}
 
-	bool InputManager::JoyHatDown(HAT_DIR direction) {
+	bool InputManager::JoyHatDown(HAT_DIR direction, int joynum) {
 
-		if (joy != NULL)
-			return ((mJoyHatState & direction) != 0);
+		if (joy[joynum] != NULL)
+			return ((mJoyHatState[joynum] & direction) != 0);
 		else
 			return false;
 	}
 
-	bool InputManager::JoyHatPressed(HAT_DIR direction) {
+	bool InputManager::JoyHatPressed(HAT_DIR direction, int joynum) {
 
-		if (joy != NULL)
-			return ((mPrevJoyHatState & direction) == 0) && ((mJoyHatState & direction) != 0);
+		if (joy[joynum] != NULL)
+			return ((mPrevJoyHatState[joynum] & direction) == 0) && ((mJoyHatState[joynum] & direction) != 0);
 		else
 			return false;
 	}
 
-	bool InputManager::JoyHatReleased(HAT_DIR direction) {
+	bool InputManager::JoyHatReleased(HAT_DIR direction, int joynum) {
 
-		if (joy != NULL)
-			return ((mPrevJoyHatState & direction) != 0) && ((mJoyHatState & direction) == 0);
+		if (joy[joynum] != NULL)
+			return ((mPrevJoyHatState[joynum] & direction) != 0) && ((mJoyHatState[joynum] & direction) == 0);
 		else
 			return false;
 	}
 
-	bool InputManager::JoyAxisDown(AXIS_NUM axis, AXIS_DIR direction) {
-		if (joy != NULL) {
+	bool InputManager::JoyAxisDown(AXIS_NUM axis, AXIS_DIR direction, int joynum) {
+
+		if (joy[joynum] != NULL) {
 			if (direction < 0) {
 
-				return (mJoyAxisState[axis] < direction);
+				return (mJoyAxisState[joynum][axis] < direction);
 			}
 			else if (direction > 0) {
 
-				return (mJoyAxisState[axis] > direction);
+				return (mJoyAxisState[joynum][axis] > direction);
 			}
 			else
-				return (mJoyAxisState[axis] > direction);
+				return (mJoyAxisState[joynum][axis] > direction);
 		}
 		else
 			return false;
 	}
 
-	bool InputManager::JoyAxisPressed(AXIS_NUM axis, AXIS_DIR direction) {
-		if (joy != NULL) {
+	bool InputManager::JoyAxisPressed(AXIS_NUM axis, AXIS_DIR direction, int joynum) {
+
+		if (joy[joynum] != NULL) {
 			if (direction < 0) {
 
-				return ((mPrevJoyAxisState[axis] < direction) == 0) && ((mJoyAxisState[axis] < direction) != 0);
+				return ((mPrevJoyAxisState[joynum][axis] < direction) == 0) && ((mJoyAxisState[joynum][axis] < direction) != 0);
 			}
 			else if (direction > 0) {
 
-				return ((mPrevJoyAxisState[axis] > direction) == 0) && ((mJoyAxisState[axis] > direction) != 0);
+				return ((mPrevJoyAxisState[joynum][axis] > direction) == 0) && ((mJoyAxisState[joynum][axis] > direction) != 0);
 			}
 			else
-				return ((mPrevJoyAxisState[axis] > direction) == 0) && ((mJoyAxisState[axis] > direction) != 0);
+				return ((mPrevJoyAxisState[joynum][axis] > direction) == 0) && ((mJoyAxisState[joynum][axis] > direction) != 0);
 		}
 		else
 			return false;
 	}
 
-	bool InputManager::JoyAxisReleased(AXIS_NUM axis, AXIS_DIR direction) {
-		if (joy != NULL) {
+	bool InputManager::JoyAxisReleased(AXIS_NUM axis, AXIS_DIR direction, int joynum) {
+
+		if (joy[joynum] != NULL) {
 			if (direction < 0) {
 
-				return ((mPrevJoyAxisState[axis] < direction) != 0) && ((mJoyAxisState[axis] < direction) == 0);
+				return ((mPrevJoyAxisState[joynum][axis] < direction) != 0) && ((mJoyAxisState[joynum][axis] < direction) == 0);
 			}
 			else if (direction > 0) {
 
-				return ((mPrevJoyAxisState[axis] > direction) != 0) && ((mJoyAxisState[axis] > direction) == 0);
+				return ((mPrevJoyAxisState[joynum][axis] > direction) != 0) && ((mJoyAxisState[joynum][axis] > direction) == 0);
 			}
 			else
-				return ((mPrevJoyAxisState[axis] > direction) != 0) && ((mJoyAxisState[axis] > direction) == 0);
+				return ((mPrevJoyAxisState[joynum][axis] > direction) != 0) && ((mJoyAxisState[joynum][axis] > direction) == 0);
 		}
 		else
 			return false;
 	}
 
-	int16_t InputManager::JoyAxis(AXIS_NUM axis) {
+	int16_t InputManager::JoyAxis(AXIS_NUM axis, int joynum) {
 
-		if (joy != NULL)
-			return mJoyAxisState[axis];
+		if (joy[joynum] != NULL)
+			return mJoyAxisState[joynum][axis];
 		else
 			return 0x0000;
 	}
 
+	std::string InputManager::JoyStickName(int joynum) {
+
+		std::string str = "No Controller";
+		if (joy[joynum] != NULL) {
+			str = SDL_JoystickName(joy[joynum]);
+		}
+		return str;
+	}
+
 	void InputManager::FindAttachedJoysticks() {
 
-		if (joy != NULL) {
+		for (int i = 0; i < MAX_JOYSTICKS; i++) {
 
-			SDL_JoystickClose(joy);
-			joy = NULL;
-		}
+			if (joy[i] != NULL) {
 
-		for (int i = 0; i < SDL_NumJoysticks(); i++) {
-
-			joy = SDL_JoystickOpen(i);
-			if (joy != NULL)
-				break;
-		}
-
-		mNumJoyButtons = SDL_JoystickNumButtons(joy);
-		mNumJoyAxes = SDL_JoystickNumAxes(joy);
-
-		if (joy != NULL) {
-
-			mJoyButtonState = new Uint8[mNumJoyButtons];
-			mPrevJoyButtonState = new Uint8[mNumJoyButtons];
-
-			for (int b = 0; b < mNumJoyButtons; b++) {
-				mJoyButtonState[b] = SDL_JoystickGetButton(joy, b);
-				mPrevJoyButtonState[b] = SDL_JoystickGetButton(joy, b);
-			}
-
-			//Assumes One Hat
-			mJoyHatState = SDL_JoystickGetHat(joy, 0);
-			mPrevJoyHatState = SDL_JoystickGetHat(joy, 0);
-
-			mJoyAxisState = new int16_t[mNumJoyAxes];
-			mPrevJoyAxisState = new int16_t[mNumJoyAxes];
-
-			for (int a = 0; a < mNumJoyAxes; a++) {
-				mJoyAxisState[a] = SDL_JoystickGetAxis(joy, a);
-				mPrevJoyAxisState[a] = SDL_JoystickGetAxis(joy, a);
+				SDL_JoystickClose(joy[i]);
+				joy[i] = NULL;
 			}
 		}
+
+		mNumJoysticks = SDL_NumJoysticks();
+
+		for (int i = 0; i < mNumJoysticks; i++) {
+
+			joy[i] = SDL_JoystickOpen(i);
+
+			if (joy[i] != NULL) {
+
+				mNumJoyButtons[i] = SDL_JoystickNumButtons(joy[i]);
+				mNumJoyAxes[i] = SDL_JoystickNumAxes(joy[i]);
+
+				mJoyButtonState[i] = new Uint8[mNumJoyButtons[i]];
+				mPrevJoyButtonState[i] = new Uint8[mNumJoyButtons[i]];
+
+				for (int b = 0; b < mNumJoyButtons[i]; b++) {
+					mJoyButtonState[i][b] = SDL_JoystickGetButton(joy[i], b);
+					mPrevJoyButtonState[i][b] = SDL_JoystickGetButton(joy[i], b);
+				}
+
+				//Assumes One Hat
+				mJoyHatState[i] = SDL_JoystickGetHat(joy[i], 0);
+				mPrevJoyHatState[i] = SDL_JoystickGetHat(joy[i], 0);
+
+				mJoyAxisState[i] = new int16_t[mNumJoyAxes[i]];
+				mPrevJoyAxisState[i] = new int16_t[mNumJoyAxes[i]];
+
+				for (int a = 0; a < mNumJoyAxes[i]; a++) {
+					mJoyAxisState[i][a] = SDL_JoystickGetAxis(joy[i], a);
+					mPrevJoyAxisState[i][a] = SDL_JoystickGetAxis(joy[i], a);
+				}
+			}
+		}
+	}
+
+	int InputManager::NumAttachedJoysticks() {
+
+		return mNumJoysticks;
 	}
 
 	Vector2 InputManager::MousePos() {
@@ -355,21 +375,24 @@ namespace QuickSDL {
 			mTouchYPos = touchState->y;
 		}
 
-		if (joy != NULL) {
+		for (int i = 0; i < MAX_JOYSTICKS; i++) {
 
-			mJoyButtonState = new Uint8[mNumJoyButtons];
+			if (joy[i] != NULL) {
 
-			for (int b = 0; b < mNumJoyButtons; b++) {
-				mJoyButtonState[b] = SDL_JoystickGetButton(joy, b);
-			}
+				mJoyButtonState[i] = new Uint8[mNumJoyButtons[i]];
 
-			//Assumes One Hat
-			mJoyHatState = SDL_JoystickGetHat(joy, 0);
+				for (int b = 0; b < mNumJoyButtons[i]; b++) {
+					mJoyButtonState[i][b] = SDL_JoystickGetButton(joy[i], b);
+				}
 
-			mJoyAxisState = new int16_t[mNumJoyAxes];
+				//Assumes One Hat
+				mJoyHatState[i] = SDL_JoystickGetHat(joy[i], 0);
 
-			for (int a = 0; a < mNumJoyAxes; a++) {
-				mJoyAxisState[a] = SDL_JoystickGetAxis(joy, a);
+				mJoyAxisState[i] = new int16_t[mNumJoyAxes[i]];
+
+				for (int a = 0; a < mNumJoyAxes[i]; a++) {
+					mJoyAxisState[i][a] = SDL_JoystickGetAxis(joy[i], a);
+				}
 			}
 		}
 	}
@@ -381,11 +404,14 @@ namespace QuickSDL {
 		//Setting the previous mouse state as the current mouse state at the end of the frame
 		mPrevMouseState = mMouseState;
 
-		if (joy != NULL) {
+		for (int i = 0; i < MAX_JOYSTICKS; i++) {
 
-			mPrevJoyButtonState = mJoyButtonState;
-			mPrevJoyHatState = mJoyHatState;
-			mPrevJoyAxisState = mJoyAxisState;
+			if (joy[i] != NULL) {
+
+				mPrevJoyButtonState[i] = mJoyButtonState[i];
+				mPrevJoyHatState[i] = mJoyHatState[i];
+				mPrevJoyAxisState[i] = mJoyAxisState[i];
+			}
 		}
 	}
 }

@@ -10,11 +10,17 @@
 #include <SDL.h>
 //---------------------------------------------------------------------
 #include "MathHelper.h"
+#include <string>
 
 #define WIIU_JOY_A        SDL_CONTROLLER_BUTTON_A
 #define WIIU_JOY_B        SDL_CONTROLLER_BUTTON_B
 #define WIIU_JOY_X        SDL_CONTROLLER_BUTTON_X
 #define WIIU_JOY_Y        SDL_CONTROLLER_BUTTON_Y
+
+#define WII_MOTE_A		WIIU_JOY_A
+#define WII_MOTE_B		WIIU_JOY_B
+#define WII_MOTE_C		WIIU_JOY_Y
+#define WII_MOTE_Z		WIIU_JOY_X
 
 #define WIIU_JOY_PLUS     SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
 #define WIIU_JOY_L        SDL_CONTROLLER_BUTTON_START
@@ -23,10 +29,23 @@
 #define WIIU_JOY_ZR       SDL_CONTROLLER_BUTTON_LEFTSHOULDER
 #define WIIU_JOY_MINUS    SDL_CONTROLLER_BUTTON_DPAD_UP
 
+#define WII_MOTE_1		WIIU_JOY_L
+#define WII_MOTE_2		WIIU_JOY_R
+
 #define WIIU_JOY_DPAD_UP       SDL_CONTROLLER_BUTTON_DPAD_LEFT
 #define WIIU_JOY_DPAD_DOWN     SDL_CONTROLLER_BUTTON_MAX
 #define WIIU_JOY_DPAD_LEFT     SDL_CONTROLLER_BUTTON_DPAD_DOWN
 #define WIIU_JOY_DPAD_RIGHT    SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+
+#define WII_MOTE_L_SIDE_DPAD_UP		WIIU_JOY_DPAD_RIGHT
+#define WII_MOTE_L_SIDE_DPAD_DOWN	WIIU_JOY_DPAD_LEFT
+#define WII_MOTE_L_SIDE_DPAD_LEFT	WIIU_JOY_DPAD_UP
+#define WII_MOTE_L_SIDE_DPAD_RIGHT	WIIU_JOY_DPAD_DOWN
+
+#define WII_MOTE_R_SIDE_DPAD_UP		WIIU_JOY_DPAD_LEFT
+#define WII_MOTE_R_SIDE_DPAD_DOWN	WIIU_JOY_DPAD_RIGHT
+#define WII_MOTE_R_SIDE_DPAD_LEFT	WIIU_JOY_DPAD_DOWN
+#define WII_MOTE_R_SIDE_DPAD_RIGHT	WIIU_JOY_DPAD_UP
 
 #define WIIU_JOY_L_THUMB   SDL_CONTROLLER_BUTTON_BACK
 #define WIIU_JOY_R_THUMB   SDL_CONTROLLER_BUTTON_GUIDE
@@ -56,6 +75,12 @@
 
 #define XINPUT_GUIDE    SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
 
+#ifdef __WIIU__
+#define MAX_JOYSTICKS	5
+#else
+#define MAX_JOYSTICKS	4
+#endif
+
 //---------------------------------------------------------------------
 // QuickSDL
 //---------------------------------------------------------------------
@@ -72,7 +97,8 @@ namespace QuickSDL {
 		enum MOUSE_BUTTON { left = 0, right, middle, back, forward };
 		enum HAT_DIR { hat_up = SDL_HAT_UP, hat_right = SDL_HAT_RIGHT, hat_down = SDL_HAT_DOWN, hat_left = SDL_HAT_LEFT };
 		enum AXIS_NUM { left_joy_x = 0, left_joy_y = 1, left_trigger = 2, right_joy_x = 3, right_joy_y = 4, right_trigger = 5,
-						left_wiiu_joy_x = 0, left_wiiu_joy_y = 1, right_wiiu_joy_x = 2, right_wiiu_joy_y = 3 };
+						left_wiiu_joy_x = 0, left_wiiu_joy_y = 1, right_wiiu_joy_x = 2, right_wiiu_joy_y = 3,
+						wiimote_joy_x = 0, wiimote_joy_y = 1 };
 		enum AXIS_DIR { axis_up = -16000, axis_down = 16000, axis_left = -16000, axis_right = 16000, trigger_down = 0 };
 
 	private:
@@ -98,18 +124,19 @@ namespace QuickSDL {
 		int mTouchXPos;
 		int mTouchYPos;
 
-		SDL_Joystick* joy;
+		SDL_Joystick* joy[MAX_JOYSTICKS];
+		int mNumJoysticks;
 
-		Uint8* mPrevJoyButtonState;
-		Uint8* mJoyButtonState;
-		int mNumJoyButtons;
+		Uint8* mPrevJoyButtonState[MAX_JOYSTICKS];
+		Uint8* mJoyButtonState[MAX_JOYSTICKS];
+		int mNumJoyButtons[MAX_JOYSTICKS];
 
-		Uint8 mPrevJoyHatState;
-		Uint8 mJoyHatState;
+		Uint8 mPrevJoyHatState[MAX_JOYSTICKS];
+		Uint8 mJoyHatState[MAX_JOYSTICKS];
 
-		int16_t* mPrevJoyAxisState;
-		int16_t* mJoyAxisState;
-		int mNumJoyAxes;
+		int16_t* mPrevJoyAxisState[MAX_JOYSTICKS];
+		int16_t* mJoyAxisState[MAX_JOYSTICKS];
+		int mNumJoyAxes[MAX_JOYSTICKS];
 
 	public:
 		//-----------------------------------------
@@ -153,21 +180,24 @@ namespace QuickSDL {
 		Vector2 MousePos();
 		Vector2 TouchPos();
 
-		bool JoyButtonDown(int button);
-		bool JoyButtonPressed(int button);
-		bool JoyButtonReleased(int button);
+		bool JoyButtonDown(int button, int joynum = 0);
+		bool JoyButtonPressed(int button, int joynum = 0);
+		bool JoyButtonReleased(int button, int joynum = 0);
 
-		bool JoyHatDown(HAT_DIR direction);
-		bool JoyHatPressed(HAT_DIR direction);
-		bool JoyHatReleased(HAT_DIR direction);
+		bool JoyHatDown(HAT_DIR direction, int joynum = 0);
+		bool JoyHatPressed(HAT_DIR direction, int joynum = 0);
+		bool JoyHatReleased(HAT_DIR direction, int joynum = 0);
 
-		bool JoyAxisDown(AXIS_NUM axis, AXIS_DIR direction);
-		bool JoyAxisPressed(AXIS_NUM axis, AXIS_DIR direction);
-		bool JoyAxisReleased(AXIS_NUM axis, AXIS_DIR direction);
+		bool JoyAxisDown(AXIS_NUM axis, AXIS_DIR direction, int joynum = 0);
+		bool JoyAxisPressed(AXIS_NUM axis, AXIS_DIR direction, int joynum = 0);
+		bool JoyAxisReleased(AXIS_NUM axis, AXIS_DIR direction, int joynum = 0);
 
-		int16_t JoyAxis(AXIS_NUM axis);
+		int16_t JoyAxis(AXIS_NUM axis, int joynum = 0);
+
+		std::string JoyStickName(int joynum = 0);
 
 		void FindAttachedJoysticks();
+		int NumAttachedJoysticks();
 
 		//----------------------------------------------------------------------------------
 		//Updates the Input States (should be called once per frame before any input check) 

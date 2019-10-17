@@ -1,6 +1,6 @@
 This is the README for Quick SDL
 
-Current version is 0.9.2
+Current version is 0.9.3
 
 COMPILE
 =======
@@ -60,7 +60,7 @@ Quick SDL features:
 - Easy Music and SFX use
 - Fully managed resources, so resources are only loaded once
 - W3C Color definitions included
-- Single joystick support (more can be added easily)
+- Multi joystick support
 - Keeps the state of the joystick, including buttons, axises, and hat.
 - Wii U Gamepad and XINPUT button, axis, and hat defines.
 - Uses SDL built-in Keyboard states for use on PC, Wii U support may be added later
